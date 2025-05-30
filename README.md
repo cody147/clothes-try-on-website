@@ -1,107 +1,67 @@
 # Clothes Try-On Website
 
-这是一个基于 Next.js 15 构建的虚拟试衣网站，使用最新的 React 19 和 TypeScript 开发。该项目采用了现代化的技术栈和最佳实践，提供了一个流畅的用户体验。
+本项目是一个基于 Next.js 15 + React 19 + TypeScript 的 AI 虚拟试衣网站，采用现代前后端分层架构，代码结构清晰，易于扩展和维护。
 
 ## 技术栈
+- Next.js 15 (App Router)
+- React 19 (函数组件)
+- TypeScript (类型安全)
+- Shadcn UI + Radix UI + Tailwind CSS (现代UI)
+- @fal-ai/client (AI 试衣/图片上传)
 
-- **框架**: Next.js 15 (App Router)
-- **UI 库**: 
-  - Shadcn UI
-  - Radix UI
-  - Tailwind CSS
-- **状态管理**: React Hooks
-- **表单处理**: React Hook Form + Zod
-- **样式**: Tailwind CSS
-- **动画**: tailwindcss-animate
-- **主题**: next-themes
-- **AI 集成**: @fal-ai/serverless-client
-
-## 项目结构
+## 目录结构
 
 ```
-├── app/                    # Next.js App Router 目录
-│   ├── api/               # API 路由
-│   ├── globals.css        # 全局样式
-│   ├── layout.tsx         # 根布局
-│   └── page.tsx           # 主页
-├── components/            # React 组件
-│   ├── ui/               # UI 组件
-│   └── theme-provider.tsx # 主题提供者
-├── hooks/                # 自定义 React Hooks
-├── lib/                  # 工具函数和配置
-├── public/              # 静态资源
-└── styles/              # 样式文件
+├── app/
+│   ├── api/
+│   │   ├── try-on/route.ts      # 试穿API
+│   │   └── upload/route.ts      # 图片上传API
+│   └── page.tsx                # 主页（仅负责页面组合）
+├── components/
+│   └── try-on/
+│       ├── try-on-form.tsx     # 上传与参数输入组件
+│       ├── try-on-result.tsx   # 结果展示组件
+│       └── try-on-history.tsx  # 历史记录组件
+│   └── ui/                    # 基础UI组件
+├── lib/
+│   ├── fal-client.ts           # fal.ai 客户端初始化
+│   ├── try-on-service.ts       # 试穿服务
+│   ├── upload-service.ts       # 上传服务
+│   ├── utils.ts                # 工具函数
+│   └── types/tryon.ts          # 类型定义
+├── public/                     # 静态资源
 ```
 
 ## 主要功能
+- AI 虚拟试衣（上传人物和衣服图片，生成试穿效果）
+- 历史记录本地保存
+- 响应式设计，移动端友好
+- 现代化 UI 体验
 
-1. **虚拟试衣**: 使用 AI 技术实现虚拟试衣功能
-2. **响应式设计**: 采用移动优先的设计理念
-3. **主题支持**: 支持亮色/暗色主题切换
-4. **现代化 UI**: 使用 Shadcn UI 和 Radix UI 组件
-5. **性能优化**: 
-   - 使用 React Server Components
-   - 图片优化
-   - 动态加载
+## 运行方式
 
-## 开发指南
-
-### 环境要求
-
-- Node.js 18+
-- npm 包管理器
-
-### 安装依赖
-
+1. 安装依赖
 ```bash
-# 首次安装
 npm install
-
-# 如果遇到依赖问题，可以尝试清理后重新安装
-npm run install:clean
 ```
-
-### 开发服务器
-
+2. 配置环境变量
+```
+# .env.local
+FAL_KEY=你的fal.ai API Key
+```
+3. 启动开发服务器
 ```bash
 npm run dev
 ```
 
-### 构建生产版本
+## 代码规范与扩展性
+- 业务与UI分层，类型定义独立，易于维护
+- 组件职责单一，便于复用和扩展
+- 所有API Key仅在服务端使用，安全可靠
+- 支持未来扩展（如多模型、多参数、更多上传类型）
 
-```bash
-npm run build
-```
-
-### 启动生产服务器
-
-```bash
-npm run start
-```
-
-## 代码规范
-
-- 使用 TypeScript 进行类型检查
-- 遵循函数式编程范式
-- 使用 React Server Components 优化性能
-- 采用移动优先的响应式设计
-- 使用 Tailwind CSS 进行样式管理
-
-## 性能优化
-
-- 最小化客户端组件使用
-- 实现图片懒加载
-- 使用 Suspense 进行代码分割
-- 优化 Web Vitals 指标
-
-## 贡献指南
-
-1. Fork 项目
-2. 创建特性分支
-3. 提交更改
-4. 推送到分支
-5. 创建 Pull Request
+## 贡献
+欢迎 PR 和 issue！
 
 ## 许可证
-
 MIT 

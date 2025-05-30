@@ -1,10 +1,17 @@
 "use client"
 
+import { TryOnResult } from "@/lib/types/tryon";
+
 export async function generateTryOnPhoto(personImage: string, clothingUrl: string): Promise<string> {
   try {
     console.log("开始生成试穿照片...")
     console.log("人物图片:", personImage)
     console.log("衣服图片:", clothingUrl)
+
+    // 确保URL是完整的
+    if (!personImage.startsWith('http') || !clothingUrl.startsWith('http')) {
+      throw new Error('图片URL无效，请重新上传图片')
+    }
 
     const response = await fetch("/api/try-on", {
       method: "POST",

@@ -10,6 +10,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "缺少必要参数" }, { status: 400 })
     }
 
+    // 确保URL是完整的
+    if (!personImage.startsWith('http') || !clothingUrl.startsWith('http')) {
+      return NextResponse.json({ error: "图片URL无效" }, { status: 400 })
+    }
+
     if (!process.env.FAL_KEY) {
       console.error("FAL_KEY环境变量未设置")
       return NextResponse.json({ error: "服务配置错误" }, { status: 500 })
